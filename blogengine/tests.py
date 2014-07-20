@@ -1,3 +1,5 @@
+from django.contrib.flatpages.models import FlatPage
+from django.contrib.sites.models import Site
 from django.test import TestCase, LiveServerTestCase, Client
 from django.utils import timezone
 from blogengine.models import Post
@@ -36,7 +38,11 @@ class PostTest(TestCase):
         self.assertEquals(only_post.slug, 'my-first-post')
 
 
-class AdminTest(LiveServerTestCase):
+class BaseAcceptanceTest(LiveServerTestCase):
+    def setUp(self):
+        self.client = Client()
+
+class AdminTest(BaseAcceptanceTest):
     fixtures = ['users.json']
 
     def setUp(self):
@@ -174,7 +180,7 @@ class AdminTest(LiveServerTestCase):
         self.assertEquals(len(all_posts), 0)
 
 
-class PostViewTest(LiveServerTestCase):
+class PostViewTest(BaseAcceptanceTest):
     def setUp(self):
         self.client = Client()
 

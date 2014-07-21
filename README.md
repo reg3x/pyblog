@@ -1,10 +1,10 @@
-pyblog
-======
+PyBlog
+=======
 
 Blog project with most modern technologies using Python.  
 It's being built using:
 
-Tools
+###Tools
 * [Django](djangoproject.com) Framework 
 * Bootstrap and Html5-boilerplate for Templates
 * [South](http://south.aeracode.org) for data Migration
@@ -12,13 +12,13 @@ Tools
 * Markdown for Highlithing
 
 
-Features
+###Features
 * Django Paginator
 * Django RSS Feeder
 * Markdown Highlithing
 
 
-Concepts
+###Concepts
 * MVC
 * TDD (Test Driven Development)
 * Continuous Integration

@@ -1,8 +1,8 @@
 #PyBlog
 
 
-Blog with most modern technologies using Python.  
-It's built with:
+Blog built with most modern technologies.  
+
 
 ###Tools
 * [Django](djangoproject.com) Framework 

@@ -23,7 +23,7 @@ It's being built using:
 
 
 ###Concepts
-* MVC
+* MVC (Model View Controller)
 * TDD (Test Driven Development)
 * Continuous Integration
 * Code Coverage

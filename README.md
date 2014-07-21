@@ -1,5 +1,5 @@
-PyBlog
-=======
+#PyBlog
+
 
 Blog project with most modern technologies using Python.  
 It's being built using:

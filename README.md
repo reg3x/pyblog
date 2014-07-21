@@ -10,12 +10,16 @@ It's being built using:
 * [South](http://south.aeracode.org) for data Migration
 * Facebook API for handling comments 
 * Markdown for Highlithing
+* Travis CI for continuous integration
+* Heroku for deployment
 
 
 ###Features
-* Django Paginator
-* Django RSS Feeder
+* Paginator
+* RSS Feeder
+* FlatPage
 * Markdown Highlithing
+* Unit Tests
 
 
 ###Concepts

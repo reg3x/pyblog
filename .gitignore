@@ -2,7 +2,6 @@ venv/
 .idea/
 *.pyc
 db.sqlite3
-blogengine/static/bower_components/
 reports/
 htmlcov/
 .coverage

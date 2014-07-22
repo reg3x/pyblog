@@ -3,7 +3,7 @@ from django.views.generic import ListView
 from blogengine.models import Category, Post, Tag
 from django.contrib.syndication.views import Feed
 
-# Create your views here.
+
 class CategoryListView(ListView):
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -37,4 +37,3 @@ class PostsFeed(Feed):
 
     def item_description(self, item):
         return item.text
-

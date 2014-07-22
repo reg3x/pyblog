@@ -41,7 +41,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.syndication',
+    'django_jenkins',
 )
+
+# Jenkins Tasks
+JENKINS_TASKS = (
+    'django_jenkins.tasks.run_pylint',
+    'django_jenkins.tasks.with_coverage'
+)
+
+PROJECT_APPS = ['blogengine']
 
 SITE_ID = 1
 

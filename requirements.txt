@@ -15,6 +15,7 @@ gunicorn==19.0.0
 logilab-common==0.62.0
 markdown2==2.2.1
 psycopg2==2.5.3
+pygments-style-solarized==0.1.1
 pylint==1.2.1
 requests==2.3.0
 static3==0.5.1

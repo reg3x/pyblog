@@ -1,11 +1,11 @@
 from django.conf.urls import patterns, url
 from django.views.generic import ListView, DetailView
 from blogengine.models import Post, Category, Tag
-from blogengine.views import CategoryListView, TagListView, PostsFeed
+from blogengine.views import CategoryListView, TagListView, PostsFeed, BaseView, SingleView
 
 urlpatterns = patterns('',
     # Index
-    url(r'^(?P<page>\d+)?/?$', ListView.as_view(
+    url(r'^(?P<page>\d+)?/?$', BaseView.as_view(
         model=Post,
         paginate_by=5,
         # we probably need to make db queries for tag and categories counters
@@ -13,7 +13,7 @@ urlpatterns = patterns('',
         )),
 
     # Individual posts
-    url(r'^(?P<pub_date__year>\d{4})/(?P<pub_date__month>\d{1,2})/(?P<slug>[a-zA-Z0-9-]+)/?$', DetailView.as_view(
+    url(r'^(?P<pub_date__year>\d{4})/(?P<pub_date__month>\d{1,2})/(?P<slug>[a-zA-Z0-9-]+)/?$', SingleView.as_view(
         model=Post,
         )),
 

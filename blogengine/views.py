@@ -28,6 +28,12 @@ class CategoryListView(ListView):
         except Category.DoesNotExist:
             return Post.objects.none()
 
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['tags'] = Tag.objects.all()
+        return context
+
 
 class TagListView(ListView):
     def get_queryset(self):
@@ -37,6 +43,12 @@ class TagListView(ListView):
             return tag.post_set.all()
         except Tag.DoesNotExist:
             return Post.objects.none()
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['tags'] = Tag.objects.all()
+        return context
 
 
 class PostsFeed(Feed):

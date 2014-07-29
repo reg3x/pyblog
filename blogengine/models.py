@@ -17,6 +17,9 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return "/tag/%s/" % (self.slug)
 
+    def count_posts(self):
+        return Post.objects.filter(tags__name=self.name).count()
+
     def __unicode__(self):
         return self.name
 
@@ -36,6 +39,9 @@ class Category(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def count_posts(self):
+        return Post.objects.filter(category__name=self.name).count()
 
     class Meta:
         verbose_name_plural = 'categories'

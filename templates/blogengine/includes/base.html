@@ -105,7 +105,7 @@
                             <ul class="list-group">
                                 {% for category in categories %}
                                     <li class="list-group-item">
-                                        <span class="badge">23</span>
+                                        <span class="badge">{{category.count_posts}}</span>
                                         {{category}}
                                     </li>
                                 {% endfor %}
@@ -137,7 +137,7 @@
                             <ul class="list-group">
                                 {% for tag in tags%}
                                 <li class="list-group-item">
-                                    <span class="badge">6</span>
+                                    <span class="badge">{{tag.count_posts}}</span>
                                     {{tag}}
                                 </li>
                                 {% endfor %}

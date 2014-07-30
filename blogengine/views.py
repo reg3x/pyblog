@@ -33,6 +33,7 @@ class BaseView(ListView):
 
 class SingleView(DetailView):
     def get_context_data(self, **kwargs):
+        # we need to amend this to fulfil DRY with baseview  !!!!!!!!!!!!!!!!!!!!!!!
         context = super(DetailView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['tags'] = Tag.objects.all()

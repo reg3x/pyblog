@@ -8,8 +8,6 @@ urlpatterns = patterns('',
     url(r'^(?P<page>\d+)?/?$', BaseView.as_view(
         model=Post,
         paginate_by=5,
-        # we probably need to make db queries for tag and categories counters
-        # or can we do this on the template ?
         )),
 
     # Individual posts
@@ -30,7 +28,8 @@ urlpatterns = patterns('',
         )),
 
     # Post RSS feed
-    url(r'^feeds/posts/$', PostsFeed()),
+    url(r'^feeds/posts/$', PostsFeed(
+    )),
 
 
 )

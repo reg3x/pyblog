@@ -106,7 +106,8 @@
                                 {% for category in categories %}
                                     <li class="list-group-item">
                                         <span class="badge">{{category.count}}</span>
-                                        {{category.name}}
+                                        {# this needs to be changed !!!!!!!!!!!! #}
+                                        <a href="{{ category.get_absolute_url }}">{{category.name}}</a>
                                     </li>
                                 {% endfor %}
                             </ul>

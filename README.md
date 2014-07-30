@@ -9,17 +9,15 @@ Blog built with most modern technologies.
 * Bootstrap and Html5-boilerplate for Templates
 * [South](http://south.aeracode.org) for data Migration
 * Facebook API for handling comments 
-* Markdown for Highlithing
+* Markdown for Code Highlithing
 * Travis CI for continuous integration
 * Heroku for deployment
 
 
 ###Features
-* Paginator
 * RSS Feeder
-* FlatPage
-* Markdown Highlithing
-* Unit Tests
+* Categories and Tags
+* Code Highlithing
 
 
 ###Concepts

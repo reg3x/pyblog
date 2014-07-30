@@ -105,8 +105,8 @@
                             <ul class="list-group">
                                 {% for category in categories %}
                                     <li class="list-group-item">
-                                        <span class="badge">{{category.count_posts}}</span>
-                                        {{category}}
+                                        <span class="badge">{{category.count}}</span>
+                                        {{category.name}}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -137,8 +137,8 @@
                             <ul class="list-group">
                                 {% for tag in tags%}
                                 <li class="list-group-item">
-                                    <span class="badge">{{tag.count_posts}}</span>
-                                    {{tag}}
+                                    <span class="badge">{{tag.count}}</span>
+                                    {{tag.name}}
                                 </li>
                                 {% endfor %}
                             </ul>
@@ -152,7 +152,6 @@
                 </div>
 
             </div>
-
 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

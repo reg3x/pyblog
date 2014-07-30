@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from blogengine.models import Category, Post, Tag
 from django.contrib.syndication.views import Feed
@@ -7,9 +6,29 @@ from django.contrib.syndication.views import Feed
 class BaseView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        context['tags'] = Tag.objects.all()
+        context['categories'] = self.cat_list_sorted()
+        context['tags'] = self.tag_list_sorted()
         return context
+
+    def cat_list_sorted(self):
+        cat_list = []
+        for category in Category.objects.all():
+            # count number of posts with the category
+            count = category.post_set.all().count()
+            # append dictionaries in a list
+            cat_list.append({'name': category.name, 'count': count})
+        # returns a sorted list of dictionaries in reverse using 'count' as the sorting key
+        return sorted(cat_list, key=lambda foo: foo['count'], reverse=True)
+
+    def tag_list_sorted(self):
+        tag_list = []
+        for tag in Tag.objects.all():
+            # count number of posts with the tag
+            count = tag.post_set.all().count()
+            # append dictionaries in a list
+            tag_list.append({'name': tag.name, 'count': count})
+        # returns a sorted list of dictionaries in reverse using 'count' as the sorting key
+        return sorted(tag_list, key=lambda foo: foo['count'], reverse=True)
 
 
 class SingleView(DetailView):
@@ -19,6 +38,7 @@ class SingleView(DetailView):
         context['tags'] = Tag.objects.all()
         return context
 
+
 class CategoryListView(BaseView):
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -27,7 +47,6 @@ class CategoryListView(BaseView):
             return Post.objects.filter(category=category)
         except Category.DoesNotExist:
             return Post.objects.none()
-
 
 
 class TagListView(BaseView):

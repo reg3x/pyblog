@@ -4,6 +4,9 @@ from django.contrib.syndication.views import Feed
 
 
 class BaseView(ListView):
+    model = Post
+    paginate_by=5
+
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
         context['categories'] = self.cat_list_sorted()
@@ -16,7 +19,7 @@ class BaseView(ListView):
             # count number of posts with the category
             count = category.post_set.all().count()
             # append dictionaries in a list
-            cat_list.append({'name': category.name, 'count': count})
+            cat_list.append({'name': category.name, 'count': count, 'url': category.get_absolute_url()})
         # returns a sorted list of dictionaries in reverse using 'count' as the sorting key
         return sorted(cat_list, key=lambda foo: foo['count'], reverse=True)
 
@@ -26,14 +29,17 @@ class BaseView(ListView):
             # count number of posts with the tag
             count = tag.post_set.all().count()
             # append dictionaries in a list
-            tag_list.append({'name': tag.name, 'count': count})
+            tag_list.append({'name': tag.name, 'count': count, 'url': tag.get_absolute_url()})
         # returns a sorted list of dictionaries in reverse using 'count' as the sorting key
         return sorted(tag_list, key=lambda foo: foo['count'], reverse=True)
 
 
 class SingleView(DetailView):
+    model = Post
+    paginate_by=5
+
     def get_context_data(self, **kwargs):
-        # we need to amend this to fulfil DRY with baseview  !!!!!!!!!!!!!!!!!!!!!!!
+        # we need to amend this to fulfil DRY with baseview, probably use inheritance  !!!!!!!!!!!!!!!!!!!!!!!
         context = super(DetailView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['tags'] = Tag.objects.all()
@@ -41,6 +47,9 @@ class SingleView(DetailView):
 
 
 class CategoryListView(BaseView):
+    model = Category
+    paginate_by=5
+
     def get_queryset(self):
         slug = self.kwargs['slug']
         try:
@@ -51,6 +60,9 @@ class CategoryListView(BaseView):
 
 
 class TagListView(BaseView):
+    model = Tag
+    paginate_by=5
+
     def get_queryset(self):
         slug = self.kwargs['slug']
         try:

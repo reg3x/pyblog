@@ -51,11 +51,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Blog</a>
+                    <a class="navbar-brand" href="{% url 'home' %}">Blog</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{ home }}">Posts</a></li>
+                        <li class="active"><a href="{% url 'home' %}">Posts</a></li>
                         {% load flatpages %}
                             {% get_flatpages as flatpages %}
                             {% for flatpage in flatpages %}
@@ -106,8 +106,7 @@
                                 {% for category in categories %}
                                     <li class="list-group-item">
                                         <span class="badge">{{category.count}}</span>
-                                        {# this needs to be changed !!!!!!!!!!!! #}
-                                        <a href="{{ category.get_absolute_url }}">{{category.name}}</a>
+                                        <a href="{{ category.url }}">{{category.name}}</a>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -139,14 +138,10 @@
                                 {% for tag in tags%}
                                 <li class="list-group-item">
                                     <span class="badge">{{tag.count}}</span>
-                                    {{tag.name}}
+                                    <a href="{{ tag.url }}">{{tag.name}}</a>
                                 </li>
                                 {% endfor %}
                             </ul>
-                            <button type="button" class="btn btn-default btn-sm ">
-                                <span class="glyphicon glyphicon-star"></span> See all
-                            </button>
-                            <div class="container"><a href="#"><span class="label label-primary">See All</span></a></div>
                         </div>
                         <!-- End of panels -->
                     </div>

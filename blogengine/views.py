@@ -3,12 +3,9 @@ from blogengine.models import Category, Post, Tag
 from django.contrib.syndication.views import Feed
 
 
-class BaseView(ListView):
-    model = Post
-    paginate_by=5
-
+class SideBarMixin(object):
     def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
+        context = super(SideBarMixin, self).get_context_data(**kwargs)
         context['categories'] = self.cat_list_sorted()
         context['tags'] = self.tag_list_sorted()
         return context
@@ -34,19 +31,18 @@ class BaseView(ListView):
         return sorted(tag_list, key=lambda foo: foo['count'], reverse=True)
 
 
-class SingleView(DetailView):
+class BaseView(SideBarMixin, ListView):
+    model = Post
+    paginate_by=5
+    name='home'
+
+
+class SingleView(SideBarMixin, DetailView):
     model = Post
     paginate_by=5
 
-    def get_context_data(self, **kwargs):
-        # we need to amend this to fulfil DRY with baseview, probably use inheritance  !!!!!!!!!!!!!!!!!!!!!!!
-        context = super(DetailView, self).get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        context['tags'] = Tag.objects.all()
-        return context
 
-
-class CategoryListView(BaseView):
+class CategoryListView(SideBarMixin, ListView):
     model = Category
     paginate_by=5
 
@@ -59,7 +55,7 @@ class CategoryListView(BaseView):
             return Post.objects.none()
 
 
-class TagListView(BaseView):
+class TagListView(SideBarMixin, ListView):
     model = Tag
     paginate_by=5
 

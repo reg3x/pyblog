@@ -101,7 +101,6 @@
                         </div>
                         <div class="panel-body">
                         <!-- Categories  -->
-
                             <ul class="list-group">
                                 {% for category in categories %}
                                     <li class="list-group-item">
@@ -113,24 +112,10 @@
                         </div>
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Archives</h3>
-                        </div>
-                        <div class="panel-body">
-                        <!-- Category 1 content-->
-                            <ul class="list-group">
-                                {% for archive in archives %}
-                                    <li class="list-group-item">
-                                        {{ archive.pub_date }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        <div class="panel-heading">
                             <h3 class="panel-title">Tags</h3>
                         </div>
                         <div class="panel-body">
-                        <!-- Category 1 content-->
+                        <!-- Tags -->
                             <ul class="list-group">
                                 {% for tag in tags%}
                                 <li class="list-group-item">
@@ -140,6 +125,23 @@
                                 {% endfor %}
                             </ul>
                         </div>
+
+                         <div class="panel-heading">
+                            <h3 class="panel-title">Archives</h3>
+                        </div>
+                        <div class="panel-body">
+                        <!-- Archives-->
+                            <ul class="list-group">
+                                {% for archive in archives %}
+                                    <li class="list-group-item">
+                                        <a href="{{ archive.url }}">{{ archive.title }}</a>
+                                        <br>
+                                        {{ archive.day }}-{{ archive.month }}, {{ archive.year }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
                         <!-- End of panels -->
                     </div>
                 </div>

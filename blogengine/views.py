@@ -6,12 +6,12 @@ from django.contrib.syndication.views import Feed
 class SideBarMixin(object):
     def get_context_data(self, **kwargs):
         context = super(SideBarMixin, self).get_context_data(**kwargs)
-        context['categories'] = self.cat_list_sorted()
-        context['tags'] = self.tag_list_sorted()
-        context['archives'] = Post.objects.order_by('pub_date')[:3] #consider to put this on a method
+        context['categories'] = self.get_category_list()
+        context['tags'] = self.get_tag_list()
+        context['archives'] = self.get_archive_list()
         return context
 
-    def cat_list_sorted(self):
+    def get_category_list(self):
         cat_list = []
         for category in Category.objects.all():
             # count number of posts with the category
@@ -21,7 +21,7 @@ class SideBarMixin(object):
         # returns a sorted list of dictionaries in reverse using 'count' as the sorting key
         return sorted(cat_list, key=lambda foo: foo['count'], reverse=True)
 
-    def tag_list_sorted(self):
+    def get_tag_list(self):
         tag_list = []
         for tag in Tag.objects.all():
             # count number of posts with the tag
@@ -31,6 +31,11 @@ class SideBarMixin(object):
         # returns a sorted list of dictionaries in reverse using 'count' as the sorting key
         return sorted(tag_list, key=lambda foo: foo['count'], reverse=True)
 
+    def get_archive_list(self):
+        archive_list = []
+        for post in Post.objects.all().order_by('-pub_date'):
+            archive_list.append({'title': post.title, 'year': post.pub_date.year, 'month': post.pub_date.month, 'day': post.pub_date.day, 'url': post.get_absolute_url()})
+        return archive_list
 
 class BaseView(SideBarMixin, ListView):
     model = Post

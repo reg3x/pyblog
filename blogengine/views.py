@@ -8,6 +8,7 @@ class SideBarMixin(object):
         context = super(SideBarMixin, self).get_context_data(**kwargs)
         context['categories'] = self.cat_list_sorted()
         context['tags'] = self.tag_list_sorted()
+        context['archives'] = Post.objects.order_by('pub_date')[:3] #consider to put this on a method
         return context
 
     def cat_list_sorted(self):

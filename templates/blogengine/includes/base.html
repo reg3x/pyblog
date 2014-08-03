@@ -118,14 +118,11 @@
                         <div class="panel-body">
                         <!-- Category 1 content-->
                             <ul class="list-group">
-                                <li class="list-group-item">
-
-                                    July 27, 09:32
-                                </li>
-                                <li class="list-group-item">
-
-                                    July 30, 20:12
-                                </li>
+                                {% for archive in archives %}
+                                    <li class="list-group-item">
+                                        {{ archive.pub_date }}
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
 

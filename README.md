@@ -16,7 +16,7 @@ Blog built with most modern technologies.
 
 ###Features
 * RSS Feeder
-* Categories and Tags
+* Categories Tags and Archive
 * Code Highlithing
 
 

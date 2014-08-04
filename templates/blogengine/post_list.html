@@ -3,8 +3,8 @@
     {% load custom_markdown %}
 
     {% block content %}
-        {% if object_list %}
-            {% for post in object_list %}
+        {% if post_list %}
+            {% for post in post_list %}
                 <div class="container-fluid">
                 <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
                 <h4>{{ post.pub_date }}</h3>

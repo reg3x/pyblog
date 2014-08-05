@@ -3,6 +3,16 @@ from blogengine.models import Category, Post, Tag
 from django.contrib.syndication.views import Feed
 
 
+class TitleSearchMixin(object):
+    def get_queryset(self):
+        queryset = super(TitleSearchMixin, self).get_queryset()
+
+        q = self.request.GET.get("q")
+        if q:
+            return queryset.filter(title__icontains=q)
+        return queryset
+
+
 class SideBarMixin(object):
     def get_context_data(self, **kwargs):
         context = super(SideBarMixin, self).get_context_data(**kwargs)
@@ -37,7 +47,7 @@ class SideBarMixin(object):
             archive_list.append({'title': post.title, 'year': post.pub_date.year, 'month': post.pub_date.month, 'day': post.pub_date.day, 'url': post.get_absolute_url()})
         return archive_list
 
-class BaseView(SideBarMixin, ListView):
+class BaseView(TitleSearchMixin, SideBarMixin, ListView):
     model = Post
     paginate_by=5
     name='home'

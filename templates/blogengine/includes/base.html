@@ -62,7 +62,7 @@
                             {% endfor %}
 			            <li><a href="/feeds/posts/">RSS feed</a></li>
                     </ul>
-                    <form action="" method="GET" class="navbar-form navbar-right" role="search">
+                    <form action="{% url 'home' %}" method="GET" class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                           <input type="text" name="q" class="form-control" placeholder="Search">
                         </div>

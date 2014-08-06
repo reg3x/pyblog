@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.syndication',
     'django_jenkins',
+    'django.contrib.auth'
+
 )
 
 # Jenkins Tasks
@@ -60,7 +62,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 )
 
 ROOT_URLCONF = 'pyblog.urls'
@@ -73,8 +75,8 @@ WSGI_APPLICATION = 'pyblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
@@ -104,7 +106,7 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # Heroku config
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config(default="sqlite:///db.sqlite3")
+DATABASES['default'] = dj_database_url.config(default="sqlite:///db.sqlite3")
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

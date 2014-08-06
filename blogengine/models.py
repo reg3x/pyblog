@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.utils.text import slugify
-
+from datetime import datetime
 
 class Tag(models.Model):
     name = models.CharField(max_length=200)
@@ -48,9 +48,9 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)
-    pub_date = models.DateTimeField()
-    text = models.TextField()
+    title = models.CharField('Post Title',max_length=200)
+    pub_date = models.DateTimeField('Publication Date', default=datetime.now)
+    text = models.TextField('Text')
     slug = models.SlugField(max_length=40, unique=True)
     author = models.ForeignKey(User)
     site = models.ForeignKey(Site)

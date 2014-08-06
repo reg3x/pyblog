@@ -1,0 +1,13 @@
+{% extends "blogengine/includes/base.html" %}
+{% block content %}
+    <form method="post" action="" role="form">
+        {% csrf_token %}
+        <!-- This line inserts a CSRF token. -->
+        <table>
+            {{ form.as_table }}
+            <!-- This line displays lines of the form.-->
+        </table>
+        <p><input type="submit" value="Create" /></p>
+    </form>
+
+{% endblock %}

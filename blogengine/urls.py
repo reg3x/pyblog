@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from blogengine.views import CategoryListView, TagListView, PostsFeed, BaseView, SingleView
+from blogengine.views import CategoryListView, TagListView, PostsFeed, BaseView, SingleView, AddPost, UpdatePost, DeletePost
 
 urlpatterns = patterns('',
     # Index
@@ -27,5 +27,20 @@ urlpatterns = patterns('',
     url(
         regex=r'^feeds/posts/$',
         view=PostsFeed()),
+
+    url(
+        regex=r'^post/add/$',
+        view=AddPost.as_view(),
+        name='addpost'),
+
+    url(
+        regex=r'^post/update/(?P<slug>[a-zA-Z0-9-]+)?$',
+        view=UpdatePost.as_view(),
+        name='updatepost'),
+
+    url(
+        regex=r'^post/delete/(?P<slug>[a-zA-Z0-9-]+)?$',
+        view=DeletePost.as_view(),
+        name='deletepost'),
 
 )

@@ -39,16 +39,19 @@ urlpatterns = patterns('',
         regex=r'^logout/$',
         view='django.contrib.auth.views.logout'),
 
+    # Add Post
     url(
         regex=r'^post/add/$',
         view=AddPost.as_view(),
         name='addpost'),
 
+    # Update Post
     url(
         regex=r'^post/update/(?P<slug>[a-zA-Z0-9-]+)?$',
         view=UpdatePost.as_view(),
         name='updatepost'),
 
+    # Delete Post
     url(
         regex=r'^post/delete/(?P<slug>[a-zA-Z0-9-]+)?$',
         view=DeletePost.as_view(),

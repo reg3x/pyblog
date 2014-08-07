@@ -1,8 +1,16 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from blogengine.models import Category, Post, Tag
 from django.contrib.syndication.views import Feed
-from forms import PostForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
+from forms import PostForm
+
+
+class LoggedInMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(LoggedInMixin, self).dispatch(*args, **kwargs)
 
 
 class TitleSearchMixin(object):
@@ -49,20 +57,21 @@ class SideBarMixin(object):
             archive_list.append({'title': post.title, 'year': post.pub_date.year, 'month': post.pub_date.month, 'day': post.pub_date.day, 'url': post.get_absolute_url()})
         return archive_list
 
+
 class BaseView(TitleSearchMixin, SideBarMixin, ListView):
     model = Post
-    paginate_by=5
-    name='home'
+    paginate_by = 5
+    name = 'home'
 
 
 class SingleView(SideBarMixin, DetailView):
     model = Post
-    paginate_by=5
+    paginate_by = 5
 
 
 class CategoryListView(SideBarMixin, ListView):
     model = Category
-    paginate_by=5
+    paginate_by = 5
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -75,7 +84,7 @@ class CategoryListView(SideBarMixin, ListView):
 
 class TagListView(SideBarMixin, ListView):
     model = Tag
-    paginate_by=5
+    paginate_by = 5
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -101,7 +110,7 @@ class PostsFeed(Feed):
         return item.text
 
 
-class AddPost(SideBarMixin, CreateView):
+class AddPost(LoggedInMixin, SideBarMixin, CreateView):
     model = Post
     #fields = ['title','text']
     #form_class = PostForm

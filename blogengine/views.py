@@ -54,7 +54,9 @@ class SideBarMixin(object):
     def get_archive_list(self):
         archive_list = []
         for post in Post.objects.all().order_by('-pub_date'):
-            archive_list.append({'title': post.title, 'year': post.pub_date.year, 'month': post.pub_date.month, 'day': post.pub_date.day, 'url': post.get_absolute_url()})
+            archive_list.append({'title': post.title, 'year': post.pub_date.year,
+                                 'month': post.pub_date.month, 'day': post.pub_date.day,
+                                 'url': post.get_absolute_url()})
         return archive_list
 
 

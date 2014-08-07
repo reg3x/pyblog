@@ -112,9 +112,6 @@ class PostsFeed(Feed):
 
 class AddPost(LoggedInMixin, SideBarMixin, CreateView):
     model = Post
-    #fields = ['title','text']
-    #form_class = PostForm
-    #success_url = 'home'
 
 
 class UpdatePost(SideBarMixin, UpdateView):
@@ -123,5 +120,4 @@ class UpdatePost(SideBarMixin, UpdateView):
 
 class DeletePost(SideBarMixin, DeleteView):
     model = Post
-    #change redirection after deletion to dashboard to check list of posts
     success_url = reverse_lazy('home')

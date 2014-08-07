@@ -116,10 +116,10 @@ class AddPost(LoggedInMixin, SideBarMixin, CreateView):
     model = Post
 
 
-class UpdatePost(SideBarMixin, UpdateView):
+class UpdatePost(LoggedInMixin, SideBarMixin, UpdateView):
     model = Post
 
 
-class DeletePost(SideBarMixin, DeleteView):
+class DeletePost(LoggedInMixin, SideBarMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('home')

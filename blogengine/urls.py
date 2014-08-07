@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
-from blogengine.views import CategoryListView, TagListView, PostsFeed, BaseView, SingleView, AddPost, UpdatePost, DeletePost
+from blogengine.views import CategoryListView, TagListView, PostsFeed, BaseView,\
+    SingleView, AddPost, UpdatePost, DeletePost
 
 urlpatterns = patterns('',
     # Index
@@ -27,6 +28,16 @@ urlpatterns = patterns('',
     url(
         regex=r'^feeds/posts/$',
         view=PostsFeed()),
+
+    # Log in
+    url(
+        regex=r'^login/$',
+        view='django.contrib.auth.views.login'),
+
+    # Log out
+    url(
+        regex=r'^logout/$',
+        view='django.contrib.auth.views.logout'),
 
     url(
         regex=r'^post/add/$',

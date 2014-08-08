@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from blogengine.views import CategoryListView, TagListView, PostsFeed, BaseView,\
-    SingleView, AddPost, UpdatePost, DeletePost
+    SingleView, AddPost, UpdatePost, DeletePost, DashBoardView
 
 urlpatterns = patterns('',
     # Index
@@ -38,6 +38,12 @@ urlpatterns = patterns('',
     url(
         regex=r'^logout/$',
         view='django.contrib.auth.views.logout'),
+
+    # Dashboard
+    url(
+        regex=r'^dashboard/$',
+        view=DashBoardView.as_view(),
+        name='dashboard'),
 
     # Add Post
     url(

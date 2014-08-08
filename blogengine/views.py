@@ -123,3 +123,7 @@ class UpdatePost(LoggedInMixin, SideBarMixin, UpdateView):
 class DeletePost(LoggedInMixin, SideBarMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('home')
+
+
+class DashBoardView(LoggedInMixin, ListView):
+    model = Post

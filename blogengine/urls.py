@@ -37,7 +37,8 @@ urlpatterns = patterns('',
     # Log out
     url(
         regex=r'^logout/$',
-        view='django.contrib.auth.views.logout'),
+        view='django.contrib.auth.views.logout',
+        kwargs={'next_page':'home'}),
 
     # Dashboard
     url(

@@ -127,3 +127,4 @@ class DeletePost(LoggedInMixin, SideBarMixin, DeleteView):
 
 class DashBoardView(LoggedInMixin, ListView):
     model = Post
+    template_name = 'blogengine/dashboard.html'

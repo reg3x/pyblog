@@ -3,8 +3,8 @@
             {% if post_list %}
                 {% for post in post_list %}
                     <div class="container-fluid">
-                        <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
-                        <h5>{{ post.pub_date }}</h3>
+                        <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                        <h5>{{ post.pub_date }}</h5>
                         <a href="{{ updatepost }}"><span class="glyphicon glyphicon-edit label label-success"> Update</span></a>
                         <a href="{{ updatepost }}"><span class="glyphicon glyphicon-remove-circle label label-danger"> Delete</span></a>
                     </div>

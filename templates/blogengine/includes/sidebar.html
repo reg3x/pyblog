@@ -1,0 +1,53 @@
+<!-- Side bar -->
+<div class="col-sm-3 col-sm-offset-1">
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Categories</h3>
+        </div>
+        <div class="panel-body">
+        <!-- Categories  -->
+            <ul class="list-group">
+                {% for category in categories %}
+                    <li class="list-group-item">
+                        <span class="badge">{{category.count}}</span>
+                        <a href="{{ category.url }}">{{category.name}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Tags</h3>
+        </div>
+        <div class="panel-body">
+        <!-- Tags -->
+            <ul class="list-group">
+                {% for tag in tags%}
+                <li class="list-group-item">
+                    <span class="badge">{{tag.count}}</span>
+                    <a href="{{ tag.url }}">{{tag.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+         <div class="panel-heading">
+            <h3 class="panel-title">Archives</h3>
+        </div>
+        <div class="panel-body">
+        <!-- Archives-->
+            <ul class="list-group">
+                {% for archive in archives %}
+                    <li class="list-group-item">
+                        <a href="{{ archive.url }}">{{ archive.title }}</a>
+                        <br>
+                        {{ archive.day }}-{{ archive.month }}, {{ archive.year }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- End of panels -->
+    </div>
+</div>
+<!-- End of SideBar -->

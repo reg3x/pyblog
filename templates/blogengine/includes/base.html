@@ -28,8 +28,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- Facebook SDK -->
-
+        <!-- Facebook SDK (used by comments)-->
         <div id="fb-root"></div>
         <script>
             (function(d, s, id) {
@@ -41,7 +40,7 @@
             }(document, 'script', 'facebook-jssdk'));
         </script>
 
-        <!-- Navegation bar -->
+        <!-- Navegation Bar -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -101,63 +100,12 @@
                     </ul>
                 </div>
 
+                <!-- Sidebar -->
                 {% if categories and tags and archives%}
-                <!-- Side bar -->
-                <div class="col-sm-3 col-sm-offset-1">
-                    <div class="panel panel-default">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Categories</h3>
-                        </div>
-                        <div class="panel-body">
-                        <!-- Categories  -->
-                            <ul class="list-group">
-                                {% for category in categories %}
-                                    <li class="list-group-item">
-                                        <span class="badge">{{category.count}}</span>
-                                        <a href="{{ category.url }}">{{category.name}}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Tags</h3>
-                        </div>
-                        <div class="panel-body">
-                        <!-- Tags -->
-                            <ul class="list-group">
-                                {% for tag in tags%}
-                                <li class="list-group-item">
-                                    <span class="badge">{{tag.count}}</span>
-                                    <a href="{{ tag.url }}">{{tag.name}}</a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                         <div class="panel-heading">
-                            <h3 class="panel-title">Archives</h3>
-                        </div>
-                        <div class="panel-body">
-                        <!-- Archives-->
-                            <ul class="list-group">
-                                {% for archive in archives %}
-                                    <li class="list-group-item">
-                                        <a href="{{ archive.url }}">{{ archive.title }}</a>
-                                        <br>
-                                        {{ archive.day }}-{{ archive.month }}, {{ archive.year }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <!-- End of panels -->
-                    </div>
-                </div>
+                    {% include "blogengine/includes/sidebar.html" %}
                 {% endif %}
-                <!-- End of SideBar -->
-            </div>
 
+            </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{% static 'bower_components/html5-boilerplate/js/vendor/jquery-1.10.2.min.js' %}"><\/script>')</script>

@@ -114,15 +114,17 @@ class PostsFeed(Feed):
 
 class AddPost(LoggedInMixin, SideBarMixin, CreateView):
     model = Post
+    success_url = reverse_lazy('dashboard')
 
 
 class UpdatePost(LoggedInMixin, SideBarMixin, UpdateView):
     model = Post
+    success_url = reverse_lazy('dashboard')
 
 
 class DeletePost(LoggedInMixin, SideBarMixin, DeleteView):
     model = Post
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
 
 
 class DashBoardView(LoggedInMixin, ListView):

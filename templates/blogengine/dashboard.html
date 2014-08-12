@@ -3,10 +3,18 @@
             {% if post_list %}
                 {% for post in post_list %}
                     <div class="container-fluid">
-                        <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
-                        <h5>{{ post.pub_date }}</h5>
-                        <a href="{{ updatepost }}"><span class="glyphicon glyphicon-edit label label-success"> Update</span></a>
-                        <a href="{{ updatepost }}"><span class="glyphicon glyphicon-remove-circle label label-danger"> Delete</span></a>
+                        <table class="table table-bordered">
+                            <tr>
+                                <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                            </tr>
+                            <tr>
+                                <h5>{{ post.pub_date }}</h5>
+                            </tr>
+                            <tr>
+                                <a href="{% url 'updatepost' post.slug %}"><span class="glyphicon glyphicon-edit label label-success"> Update</span></a>
+                                <a href="{% url 'deletepost' post.slug %}"><span class="glyphicon glyphicon-remove-circle label label-danger"> Delete</span></a>
+                            </tr>
+                        </table>
                     </div>
                 {% endfor %}
             {% else %}

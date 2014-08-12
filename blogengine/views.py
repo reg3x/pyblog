@@ -4,7 +4,6 @@ from django.contrib.syndication.views import Feed
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
-from forms import PostForm
 
 
 class LoggedInMixin(object):

@@ -1,11 +1,10 @@
 {% extends "blogengine/includes/base.html" %}
+{% load bootstrap %}
 {% block content %}
     <h3>Do you want to delete this object?</h3>
-    <form method="post" action="">
+    <form method="post" action="" role="form">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <p><input type="submit" value="Delete" /></p>
+        {{ form |bootstrap}}
+        <button type="submit" class="btn btn-default">Confirm Delete</button>
     </form>
 {% endblock %}

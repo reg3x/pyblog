@@ -55,6 +55,7 @@ JENKINS_TASKS = (
 
 PROJECT_APPS = ['blogengine']
 
+# sites framework
 SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
@@ -76,8 +77,7 @@ WSGI_APPLICATION = 'pyblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
     }
 }
 
@@ -107,7 +107,7 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # Heroku config
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] = dj_database_url.config(default="sqlite:///db.sqlite3")
+DATABASES['default'] = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -117,7 +117,6 @@ ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 STATIC_ROOT = 'staticfiles'
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )

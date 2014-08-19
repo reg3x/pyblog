@@ -8,15 +8,71 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Category.slug'
-        db.add_column(u'blogengine_category', 'slug',
-                      self.gf('django.db.models.fields.SlugField')(max_length=40, unique=True, null=True, blank=True),
-                      keep_default=False)
+        # Adding model 'Tag'
+        db.create_table(u'blogengine_tag', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('description', self.gf('django.db.models.fields.TextField')()),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=40, unique=True, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'blogengine', ['Tag'])
+
+        # Adding model 'Category'
+        db.create_table(u'blogengine_category', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('description', self.gf('django.db.models.fields.TextField')()),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=40, unique=True, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'blogengine', ['Category'])
+
+        # Adding model 'Post'
+        db.create_table(u'blogengine_post', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('pub_date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
+            ('text', self.gf('django.db.models.fields.TextField')()),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=40)),
+            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
+            ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['blogengine.Category'], null=True, blank=True)),
+        ))
+        db.send_create_signal(u'blogengine', ['Post'])
+
+        # Adding M2M table for field tags on 'Post'
+        m2m_table_name = db.shorten_name(u'blogengine_post_tags')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('post', models.ForeignKey(orm[u'blogengine.post'], null=False)),
+            ('tag', models.ForeignKey(orm[u'blogengine.tag'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['post_id', 'tag_id'])
+
+        # Adding model 'UserProfile'
+        db.create_table(u'blogengine_userprofile', (
+            ('user_auth', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True, primary_key=True)),
+            ('phone', self.gf('django.db.models.fields.CharField')(default=None, max_length=20, null=True, blank=True)),
+            ('born_date', self.gf('django.db.models.fields.DateField')(default=None, null=True, blank=True)),
+            ('last_connexion', self.gf('django.db.models.fields.DateTimeField')(default=None, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'blogengine', ['UserProfile'])
 
 
     def backwards(self, orm):
-        # Deleting field 'Category.slug'
-        db.delete_column(u'blogengine_category', 'slug')
+        # Deleting model 'Tag'
+        db.delete_table(u'blogengine_tag')
+
+        # Deleting model 'Category'
+        db.delete_table(u'blogengine_category')
+
+        # Deleting model 'Post'
+        db.delete_table(u'blogengine_post')
+
+        # Removing M2M table for field tags on 'Post'
+        db.delete_table(db.shorten_name(u'blogengine_post_tags'))
+
+        # Deleting model 'UserProfile'
+        db.delete_table(u'blogengine_userprofile')
 
 
     models = {
@@ -61,11 +117,26 @@ class Migration(SchemaMigration):
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['blogengine.Category']", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'pub_date': ('django.db.models.fields.DateTimeField', [], {}),
+            'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '40'}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['blogengine.Tag']", 'null': 'True', 'blank': 'True'}),
             'text': ('django.db.models.fields.TextField', [], {}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+        },
+        u'blogengine.tag': {
+            'Meta': {'object_name': 'Tag'},
+            'description': ('django.db.models.fields.TextField', [], {}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '40', 'unique': 'True', 'null': 'True', 'blank': 'True'})
+        },
+        u'blogengine.userprofile': {
+            'Meta': {'object_name': 'UserProfile'},
+            'born_date': ('django.db.models.fields.DateField', [], {'default': 'None', 'null': 'True', 'blank': 'True'}),
+            'last_connexion': ('django.db.models.fields.DateTimeField', [], {'default': 'None', 'null': 'True', 'blank': 'True'}),
+            'phone': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '20', 'null': 'True', 'blank': 'True'}),
+            'user_auth': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},

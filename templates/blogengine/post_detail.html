@@ -7,8 +7,8 @@
         <h3>{{ post.pub_date }}</h3>
         {{ post.text|custom_markdown }}
 
-        {% if object.category %}
-            <a href="{{ object.category.get_absolute_url }}"><span class="label label-primary">{{ post.category.name }}</span></a>
+        {% if post.category %}
+            <a href="{{ post.category.get_absolute_url }}"><span class="label label-primary">{{ post.category.name }}</span></a>
         {% endif %}
 
         {% if post.tags %}
@@ -18,5 +18,5 @@
         {% endif %}
 
         <h4>Comments</h4>
-        <div class="fb-comments" data-href="http://{{ object.site }}{{ object.get_absolute_url }}" data-width="470" data-num-posts="10"></div>
+        <div class="fb-comments" data-href="http://{{ post.site }}{{ post.get_absolute_url }}" data-width="470" data-num-posts="10"></div>
     {% endblock %}

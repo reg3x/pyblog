@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.syndication',
     'django_jenkins',
-    'django.contrib.auth',
     'bootstrapform',
 
 )

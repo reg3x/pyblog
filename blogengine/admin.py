@@ -11,6 +11,7 @@ class PostAdmin(admin.ModelAdmin):
         obj.author = request.user
         obj.save()
 
+
 admin.site.register(models.Category)
-admin.site.register(models.Post, PostAdmin)
 admin.site.register(models.Tag)
+admin.site.register(models.Post, PostAdmin)

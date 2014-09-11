@@ -178,6 +178,62 @@ class AdminTest(BaseAcceptanceTest):
         # Check 'Log in' in response
         self.assertTrue('Log in' in response.content)
 
+    def test_create_category(self):
+        # Log in
+        self.client.login(username='andersonthomas385', password="da4373az")
+
+        # Check response code
+        response = self.client.get('/admin/blogengine/category/')
+        self.assertEquals(response.status_code, 200)
+        response = self.client.get('/admin/blogengine/category/add/')
+        self.assertEquals(response.status_code, 200)
+
+        # Create the new category
+        response = self.client.post('/admin/blogengine/category/add/', {
+            'name': 'python',
+            'description': 'The Python programming language'
+            },
+            follow=True
+        )
+        self.assertEquals(response.status_code, 200)
+
+        # Check added successfully
+        self.assertTrue('added successfully' in response.content)
+
+        # Check new category now in database
+        all_categories = Category.objects.all()
+        self.assertEquals(len(all_categories), 1)
+
+    def test_edit_category(self):
+        # Create the category
+        category = Category()
+        category.name = 'python'
+        category.description = 'The Python programming language'
+        category.save()
+
+        # Log in
+        self.client.login(username='andersonthomas385', password="da4373az")
+
+
+
+        # Edit the category
+        response = self.client.post('/admin/blogengine/category/1/', {
+            'name': 'perl',
+            'description': 'The Perl programming language'
+            }, follow=True)
+        self.assertEquals(response.status_code, 200)
+
+        # Check changed successfully
+        self.assertTrue('changed successfully' in response.content)
+
+        # Check category amended
+        all_categories = Category.objects.all()
+        self.assertEquals(len(all_categories), 1)
+        only_category = all_categories[0]
+        self.assertEquals(only_category.name, 'perl')
+        self.assertEquals(only_category.description, 'The Perl programming language')
+
+    '''
     def test_create_post(self):
         # Create the category
         category = Category()
@@ -220,7 +276,8 @@ class AdminTest(BaseAcceptanceTest):
         # Check new post now in database
         all_posts = Post.objects.all()
         self.assertEquals(len(all_posts), 1)
-
+    '''
+    '''
     def test_create_post_without_tag(self):
         # Create the category
         category = Category()
@@ -255,7 +312,8 @@ class AdminTest(BaseAcceptanceTest):
         # Check new post now in database
         all_posts = Post.objects.all()
         self.assertEquals(len(all_posts), 1)
-
+    '''
+    '''
     def test_edit_post(self):
         # Create the category
         category = Category()
@@ -319,7 +377,8 @@ class AdminTest(BaseAcceptanceTest):
         only_post = all_posts[0]
         self.assertEquals(only_post.title, 'My second post')
         self.assertEquals(only_post.text, 'This is my second blog post')
-
+    '''
+    '''
     def test_delete_post(self):
         # Create the category
         category = Category()
@@ -375,59 +434,10 @@ class AdminTest(BaseAcceptanceTest):
         # Check post amended
         all_posts = Post.objects.all()
         self.assertEquals(len(all_posts), 0)
+    '''
 
-    def test_create_category(self):
-        # Log in
-        self.client.login(username='andersonthomas385', password="da4373az")
 
-        # Check response code
-        response = self.client.get('/admin/blogengine/category/add/')
-        self.assertEquals(response.status_code, 200)
-
-        # Create the new category
-        response = self.client.post('/admin/blogengine/category/add/', {
-            'name': 'python',
-            'description': 'The Python programming language'
-            },
-            follow=True
-        )
-        self.assertEquals(response.status_code, 200)
-
-        # Check added successfully
-        self.assertTrue('added successfully' in response.content)
-
-        # Check new category now in database
-        all_categories = Category.objects.all()
-        self.assertEquals(len(all_categories), 1)
-
-    def test_edit_category(self):
-        # Create the category
-        category = Category()
-        category.name = 'python'
-        category.description = 'The Python programming language'
-        category.save()
-
-        # Log in
-        self.client.login(username='andersonthomas385', password="da4373az")
-
-        # Edit the category
-        response = self.client.post('/admin/blogengine/category/1/', {
-            'name': 'perl',
-            'description': 'The Perl programming language'
-            }, follow=True
-        )
-        self.assertEquals(response.status_code, 200)
-
-        # Check changed successfully
-        self.assertTrue('changed successfully' in response.content)
-
-        # Check category amended
-        all_categories = Category.objects.all()
-        self.assertEquals(len(all_categories), 1)
-        only_category = all_categories[0]
-        self.assertEquals(only_category.name, 'perl')
-        self.assertEquals(only_category.description, 'The Perl programming language')
-
+    '''
     def test_delete_category(self):
         # Create the category
         category = Category()
@@ -450,7 +460,7 @@ class AdminTest(BaseAcceptanceTest):
         # Check category deleted
         all_categories = Category.objects.all()
         self.assertEquals(len(all_categories), 0)
-        
+    '''
     def test_create_tag(self):
         # Log in
         self.client.login(username='andersonthomas385', password="da4373az")
@@ -474,7 +484,7 @@ class AdminTest(BaseAcceptanceTest):
         # Check new tag now in database
         all_tags = Tag.objects.all()
         self.assertEquals(len(all_tags), 1)
-
+    '''
     def test_edit_tag(self):
         # Create the tag
         tag = Tag()
@@ -501,7 +511,8 @@ class AdminTest(BaseAcceptanceTest):
         only_tag = all_tags[0]
         self.assertEquals(only_tag.name, 'perl')
         self.assertEquals(only_tag.description, 'The Perl programming language')
-    
+    '''
+    '''
     def test_delete_tag(self):
         # Create the tag
         tag = Tag()
@@ -524,7 +535,7 @@ class AdminTest(BaseAcceptanceTest):
         # Check tag deleted
         all_tags = Tag.objects.all()
         self.assertEquals(len(all_tags), 0)
-
+    '''
 
 class PostViewTest(BaseAcceptanceTest):
     def test_index(self):

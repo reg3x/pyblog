@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.utils import timezone
 from blogengine.models import Post, Category, Tag
 from . import factories
 

@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os, sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -70,14 +69,34 @@ ROOT_URLCONF = 'pyblog.urls'
 WSGI_APPLICATION = 'pyblog.wsgi.application'
 
 
-# Database
+# Databases
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.',
+        'NAME': ''
     }
 }
+
+# Sqlite3  for Testing
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test_db'
+    }
+else:
+    # Heroku config
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -101,24 +120,6 @@ STATIC_URL = '/static/'
 #Template directory
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
-
-# Heroku config
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-if 'test' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-        }
-    }
-else:
-    DATABASES['default'] = dj_database_url.config()
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 STATIC_ROOT = 'staticfiles'

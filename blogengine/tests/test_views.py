@@ -1,6 +1,7 @@
 from django.test import TestCase, Client, LiveServerTestCase
 from blogengine import models
 from . import factories
+from django.core.urlresolvers import reverse
 
 
 class BaseAcceptanceTest(LiveServerTestCase):
@@ -29,7 +30,8 @@ class BaseViewTest(BaseAcceptanceTest):
         self.assertEquals(len(all_tags),1)
 
         # Open the client
-        response = self.client.get('/')
+        # should use blogengine:home instead of /
+        response = self.client.get(reverse('blogengine:home'))
         self.assertEquals(response.status_code, 200)
 
         # Check the post is shown at the response
@@ -40,3 +42,6 @@ class BaseViewTest(BaseAcceptanceTest):
         self.assertContains(response, only_post.category)
         self.assertContains(response, only_tag.name)
         self.assertContains(response, only_post.pub_date.strftime('%b'))
+
+    def test_post_page(self):
+        pass

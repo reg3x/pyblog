@@ -12,17 +12,20 @@ urlpatterns = patterns('',
     # Individual posts
     url(
         regex=r'^(?P<pub_date__year>\d{4})/(?P<pub_date__month>\d{1,2})/(?P<slug>[a-zA-Z0-9-]+)/?$',
-        view=SingleView.as_view()),
+        view=SingleView.as_view(),
+        name='post'),
 
     # Categories
     url(
         regex=r'^category/(?P<slug>[a-zA-Z0-9-]+)/?$',
-        view=CategoryListView.as_view()),
+        view=CategoryListView.as_view(),
+        name='category'),
 
     # Tags
     url(
         regex=r'^tag/(?P<slug>[a-zA-Z0-9-]+)/?$',
-        view=TagListView.as_view()),
+        view=TagListView.as_view(),
+        name='tag'),
 
     # Post RSS feed
     url(

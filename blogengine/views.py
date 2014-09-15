@@ -62,7 +62,6 @@ class SideBarMixin(object):
 class BaseView(TitleSearchMixin, SideBarMixin, ListView):
     model = Post
     paginate_by = 5
-    name = 'home'
 
 
 class SingleView(SideBarMixin, DetailView):

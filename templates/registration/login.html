@@ -7,7 +7,7 @@
     {% endif %}
 
 <div class="container">
-    <form method="post" action="{% url 'django.contrib.auth.views.login' %}" class="form-horizontal" role="form">{% csrf_token %}
+    <form method="post" action="{% url 'blogengine:django.contrib.auth.views.login' %}" class="form-horizontal" role="form">{% csrf_token %}
       <div class="form-group">
         <div class="col-sm-6">
             {{form.username |bootstrap}}

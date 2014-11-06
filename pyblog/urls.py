@@ -15,4 +15,8 @@ urlpatterns = patterns('',
 
     #FlatPages
     url(r'', include('django.contrib.flatpages.urls')),
+
+    # Haystack
+    url(r'^search/', include('haystack.urls')),
+
 )

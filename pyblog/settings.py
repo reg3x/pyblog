@@ -35,12 +35,15 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogengine',
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.syndication',
     'django_jenkins',
     'bootstrapform',
+    'haystack',
+
+    # My Apps
+    'blogengine',
 
 )
 
@@ -70,6 +73,7 @@ WSGI_APPLICATION = 'pyblog.wsgi.application'
 
 
 # Databases
+
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
     'default': {
@@ -96,6 +100,16 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
+#Haystack
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr'
+        # ...or for multicore...
+        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
+    },
+}
 
 
 # Internationalization

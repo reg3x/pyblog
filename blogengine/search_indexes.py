@@ -4,7 +4,8 @@ from blogengine.models import Post
 
 
 class PostIndex(indexes.SearchIndex, indexes.Indexable):
-    title = indexes.CharField(document=True, use_template=True)
+    text = indexes.CharField(document=True, use_template=True)
+    title = indexes.CharField(model_attr='title')
     author = indexes.CharField(model_attr='author')
     pub_date = indexes.CharField(model_attr='pub_date')
 

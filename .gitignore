@@ -5,3 +5,5 @@ db.sqlite3
 reports/
 htmlcov/
 .coverage
+solr-4.10.2/
+elasticsearch-1.4.0/

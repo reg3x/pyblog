@@ -11,16 +11,21 @@ class LoggedInMixin(object):
     def dispatch(self, *args, **kwargs):
         return super(LoggedInMixin, self).dispatch(*args, **kwargs)
 
-
+'''
 class TitleSearchMixin(object):
-    def get_queryset(self):
-        queryset = super(TitleSearchMixin, self).get_queryset()
-
+    def get_context_data(self, **kwargs):
+        context = super(TitleSearchMixin, self).get_context_data(**kwargs)
         q = self.request.GET.get("q")
         if q:
-            return queryset.filter(title__icontains=q)
-        return queryset
-
+            result = SearchQuerySet().filter(content=q)
+            print 'el resultado es: ' + result
+            context['post_list'] = result
+            return context
+            #return queryset.filter(title__icontains=q)
+            #return SearchQuerySet().filter(content=q)
+            #we need to check this cause it is not returning what expected
+        return context
+'''
 
 class SideBarMixin(object):
     def get_context_data(self, **kwargs):
@@ -59,7 +64,7 @@ class SideBarMixin(object):
         return archive_list
 
 
-class BaseView(TitleSearchMixin, SideBarMixin, ListView):
+class BaseView(SideBarMixin, ListView):
     model = Post
     paginate_by = 5
 

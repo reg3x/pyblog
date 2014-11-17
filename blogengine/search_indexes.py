@@ -13,4 +13,5 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
         return Post
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(pub_date__lte=datetime.datetime.now())
+        '''return self.get_model().objects.filter(pub_date__lte=datetime.datetime.now())'''
+        return self.get_model().objects.all()

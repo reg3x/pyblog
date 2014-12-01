@@ -10,13 +10,15 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
+    # Haystack
+    url(r'^search/', include('haystack.urls')),
+
     #Blog URLs
     url(r'', include('blogengine.urls', namespace="blogengine")),
 
     #FlatPages
     url(r'', include('django.contrib.flatpages.urls')),
 
-    # Haystack
-    url(r'^search/', include('haystack.urls')),
+
 
 )

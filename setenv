@@ -1,0 +1,2 @@
+#!/bin/bash
+export DATABASE_URL=postgres://diegoaguilerazambrano:da4373az@localhost:5432/blogdb

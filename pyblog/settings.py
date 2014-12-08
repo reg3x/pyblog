@@ -106,7 +106,7 @@ HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': os.environ['BONSAI_URL'],
-        'INDEX_NAME': os.environ['BONSAI_INDEX'],
+        'INDEX_NAME': 'haystack',
     },
 }
 

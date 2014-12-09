@@ -104,8 +104,8 @@ ALLOWED_HOSTS = ['*']
 
 #Haystack
 
-es = urlparse(os.environ.get('BONSAI_URL'))
-port = es.port
+es = urlparse(os.environ.get('BONSAI_URL') or 'http://127.0.0.1:9200/')
+port = es.port or 80
 
 HAYSTACK_CONNECTIONS = {
     'default': {

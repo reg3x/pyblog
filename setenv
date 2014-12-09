@@ -1,4 +1,4 @@
 #!/bin/bash
 export DATABASE_URL=postgres://diegoaguilerazambrano:da4373az@localhost:5432/blogdb
-export BONSAI_URL=http://127.0.0.1:9200/
-export BONSAI_INDEX=haystack
+#export BONSAI_URL=http://127.0.0.1:9200/
+#export BONSAI_INDEX=haystack

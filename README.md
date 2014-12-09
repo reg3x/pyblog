@@ -5,21 +5,20 @@ Blog built with most modern technologies.
 
 
 ###Tools
-* [Django](djangoproject.com) Framework 
+* [Django 1.7](djangoproject.com) Framework 
 * Bootstrap and Html5-boilerplate for Templates
-* [South](http://south.aeracode.org) for data Migration
 * Facebook API for handling comments 
 * Markdown for Code Highlithing
 * Travis CI for continuous integration
 * Heroku for deployment
-
+* ElasticSearch for Search Engine
 
 ###Features
 * RSS Feeder
 * Categories Tags and Archive
 * Code Highlithing
 * Dashboard
-
+* Fast Searching (REST Lucene based)
 
 ###Concepts
 * MVC (Model View Controller)

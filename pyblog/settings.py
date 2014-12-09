@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os, sys
+from urlparse import urlparse
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
@@ -102,14 +104,19 @@ ALLOWED_HOSTS = ['*']
 
 #Haystack
 
+es = urlparse(os.environ.get('BONSAI_URL'))
+port = es.port
+
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': os.environ['BONSAI_URL'],
+        'URL': es.scheme + '://' + es.hostname + ':' + str(port),
         'INDEX_NAME': 'haystack',
     },
 }
 
+if es.username:
+    HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

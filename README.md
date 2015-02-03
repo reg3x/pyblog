@@ -1,7 +1,7 @@
 #PyBlog
 
 
-Blog built with most modern technologies.  
+My Blog built with frequently used technologies.  
 
 
 ###Tools

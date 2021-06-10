@@ -1,4 +1,4 @@
-Django==1.7
+Django==2.2.24
 PyYAML==3.11
 Pygments==1.6
 astroid==1.2.1
